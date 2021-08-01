@@ -33,7 +33,7 @@ db_arr=$(echo "show databases;" | mysql --defaults-extra-file=$config)
 current_date=$(date +"%Y-%m-%d")
 
 # Get the date 7 days ago. Used to delete the redundant backup file.
-old_date=$(date +"%Y-%m-%d" --date="7 days ago")
+old_date=$(date +"%Y-%m-%d" --date="14 days ago")
 
 # Create a temporary backup directory to hold the SQL files, which will be deleted later
 mkdir $current_date
@@ -61,7 +61,7 @@ fi
 
 # Tar, compress, and encrypt the dumped SQL files
 echo "Compressing and encrypting dumped SQL files..."
-tar cz $current_date
+tar cz $current_date > $current_date.tar.gz
 
 # Remove the backups directory
 echo "Removing dumped SQL files..."
@@ -77,6 +77,6 @@ echo "Deleting old Dropbox backup..."
 
 # Delete the local copy of the backup tarball that we just created
 echo "Deleting local backup tarball..."
-rm -f $current_date.tar.gz
+rm -f $current_date.tar.gz.enc
 
 echo "Finished"
