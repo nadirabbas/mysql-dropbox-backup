@@ -18,6 +18,7 @@ Dump MySQL databases, compress them, and upload to [Dropbox] for a simple off-si
 
 ## Run
 1. In the terminal, run `./mysql-dropbox-backup.sh`
+2. Enter App Key
 3. Enter App Secret Key
 4. Click on the generated link
 5. Click continue
