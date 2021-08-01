@@ -61,7 +61,7 @@ fi
 
 # Tar, compress, and encrypt the dumped SQL files
 echo "Compressing and encrypting dumped SQL files..."
-tar cz $current_date | openssl enc -aes-256-cbc -e -k $encryption_pass > $current_date.tar.gz.enc
+tar cz $current_date
 
 # Remove the backups directory
 echo "Removing dumped SQL files..."
@@ -69,14 +69,14 @@ rm -rf $current_date/
 
 # Upload the backup tarball to Dropbox
 echo "Uploading backup tarball to Dropbox..."
-./dropbox_uploader.sh upload $current_date.tar.gz.enc $current_date.tar.gz.enc
+./dropbox_uploader.sh upload $current_date.tar.gz $current_date.tar.gz
 
 # Delete the old backup
 echo "Deleting old Dropbox backup..."
-./dropbox_uploader.sh delete $old_date.tar.gz.enc
+./dropbox_uploader.sh delete $old_date.tar.gz
 
 # Delete the local copy of the backup tarball that we just created
 echo "Deleting local backup tarball..."
-rm -f $current_date.tar.gz.enc
+rm -f $current_date.tar.gz
 
 echo "Finished"
